@@ -1,0 +1,16 @@
+body {
+  background-color: #000;
+}
+
+#canvas1 {
+  background-color: #00F;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: 5px solid #FFF;
+}
+
+#playerImage, #backgroundImage, #enemyImage {
+  display: none;
+}
