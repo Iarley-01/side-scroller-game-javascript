@@ -44,6 +44,8 @@ window.addEventListener("load", function() {
       this.frameX = 0;
       this.frameY = 0;
       this.speed = 0;
+      this.vy = 0;
+      this.weight = 0;
     }
     
     draw(context) {
@@ -60,12 +62,30 @@ window.addEventListener("load", function() {
       } else if (input.keys.indexOf("ArrowLeft") > -1) {
         this.speed = -5;
       }
+      else if (input.keys.indexOf("ArrowUp") > -1 && this.onGround()) {
+        this.vy -= 32;
+      }
       else {
         this.speed = 0;
       }
       
       if(this.x < 0) this.x = 0;
       else if(this.x > this.gameWidth - this.width) this.x = this.gameWidth - this.width;
+      //Lógica do movimento vertical
+      this.y += this.vy;
+      if (!this.onGround()) {
+        this.vy += this.weight;
+        this.frameY = 1;
+      } else {
+        this.vy = 0;
+        this.frameY = 0;
+      }
+      
+      if(this.y > this.gameHeight - this.height) this.y = this.gameHeight - this.height;
+    }
+    
+    onGround() {
+      return this.y >= this.gameHeight - this.height;
     }
   }
   
